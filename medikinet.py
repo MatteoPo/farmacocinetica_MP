@@ -39,5 +39,21 @@ fig.add_trace(go.Scatter(x=t, y=p1, name='Pasticca 1', fill='tozeroy', line=dict
 fig.add_trace(go.Scatter(x=t, y=p2, name='Pasticca 2', fill='tozeroy', line=dict(dash='dash')))
 fig.add_trace(go.Scatter(x=t, y=tot, name='Totale', line=dict(color='white', width=2)))
 
-fig.update_layout(template="plotly_dark", xaxis_title="Ore", yaxis_title="Conc. Plasmatica")
+# ... (tutto il resto del codice) ...
+
+fig.update_layout(
+    template="plotly_dark",
+    xaxis_title="Ore della giornata",
+    yaxis_title="Conc. Plasmatica",
+    # Configurazione della granularità
+    xaxis=dict(
+        tickmode='linear',
+        tick0=6,      # Partenza dalle ore 6
+        dtick=1,      # Intervallo di 1 ora
+        gridcolor='gray'
+    ),
+    yaxis=dict(gridcolor='gray')
+)
+
+st.plotly_chart(fig)
 st.plotly_chart(fig)
