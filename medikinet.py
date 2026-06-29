@@ -8,7 +8,8 @@ st.title("Simulatore Medikinet XR")
 # Parametri clinici
 emivita = st.sidebar.slider("Emivita (h)", 1.0, 5.0, 2.5)
 t_max = st.sidebar.slider("Tmax (h)", 0.5, 2.5, 1.5)
-ritardo = st.sidebar.slider("Ritardo rilascio MR (h)", 2.0, 6.0, 4.0)
+ritardo1 = st.sidebar.slider("Ritardo rilascio MR (h)", 2.0, 6.0, 4.0)
+ritardo2 = st.sidebar.slider("Ritardo rilascio MR (h)", 2.0, 6.0, 4.0)
 
 # Calcolo costanti: ke e ka (derivato da Tmax)
 ke = np.log(2) / emivita
@@ -18,7 +19,7 @@ def bateman(t, ka, ke, dose):
     # La formula classica di Bateman
     return dose * (ka / (ka - ke)) * (np.exp(-ke * t) - np.exp(-ka * t))
 
-def get_profile(t, dose, t_assunzione):
+def get_profile(t, dose, t_assunzione, ritardo):
     # IR: picco immediato
     ir = bateman(np.maximum(0, t - t_assunzione), ka, ke, dose * 0.5)
     # MR: picco ritardato
@@ -30,7 +31,7 @@ d1, t1 = st.slider("Dose 1 (mg)", 0, 40, 20), st.slider("Ora 1", 6, 12, 7)
 d2, t2 = st.slider("Dose 2 (mg)", 0, 40, 20), st.slider("Ora 2", 8, 20, 12)
 
 t = np.linspace(6, 30, 300)
-p1, p2 = get_profile(t, d1, t1), get_profile(t, d2, t2)
+p1, p2 = get_profile(t, d1, t1, ritardo1), get_profile(t, d2, t2, ritardo2)
 tot = p1 + p2
 
 # Plot
