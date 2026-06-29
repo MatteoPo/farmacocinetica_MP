@@ -54,6 +54,4 @@ fig.update_layout(
     ),
     yaxis=dict(gridcolor='gray')
 )
-
-st.plotly_chart(fig)
 st.plotly_chart(fig)
