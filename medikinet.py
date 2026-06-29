@@ -8,8 +8,8 @@ st.title("Simulatore Medikinet XR")
 # Parametri clinici
 emivita = st.sidebar.slider("Emivita (h)", 1.0, 5.0, 2.5)
 t_max = st.sidebar.slider("Tmax (h)", 0.5, 2.5, 1.5)
-ritardo1 = st.sidebar.slider("Ritardo rilascio MR (h)", 2.0, 6.0, 4.0)
-ritardo2 = st.sidebar.slider("Ritardo rilascio MR (h)", 2.0, 6.0, 4.0)
+ritardo1 = st.sidebar.slider("Ritardo rilascio MR 1 dose (h)", 2.0, 6.0, 4.0)
+ritardo2 = st.sidebar.slider("Ritardo rilascio MR 2 dose (h)", 2.0, 6.0, 4.0)
 
 # Calcolo costanti: ke e ka (derivato da Tmax)
 ke = np.log(2) / emivita
